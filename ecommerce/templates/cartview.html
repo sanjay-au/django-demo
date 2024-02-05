@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h4 class="text-center m-2 mb-4 p-2 border border-success text-success">Shopping Cart</h4>
+        <div class="col-8">
+            <table class="table mb-5">
+                <tr><th class="text-center text-danger fw-bold" colspan="5">Cart Items</th></tr>
+                {% for i in c %}
+                <tr><td><img src="{{i.product.image.url}}" width="200px" height="100px"></td>
+                <td><h5 class="text-center">{{i.product.name}}</h5></td>
+                    <td><h6>Product Id: {{i.product.id}}</h6>
+                    <h6>Unit Price: {{i.product.price}}</h6>
+                    <h6>Quantity: {{i.quantity}} * {{i.product.price}}</h6></td>
+                    <td>Subtotal: <label class="text-danger">{{i.subtotal}}</label></td>
+                    <td class="my-auto">
+                        {% if i.product.stock > 0 %}
+                        <a href="{% url 'cart:addtocart' i.product.name %}" class="m-2"><i class="fa-solid fa-circle-plus fa-lg" style="color: #109320;"></i></a><br>
+                        <a href="{% url 'cart:removecart' i.product.name %}" class="m-2"><i class="fa-solid fa-circle-minus fa-lg" style="color: #005cfa;"></i></a><br>
+                        <a href="{% url 'cart:deletecart' i.product.name %}" class="m-2"><i class="fa-solid fa-trash fa-lg" style="color: #f50000;"></i></a>
+                        {% else %}
+                        <a href="{% url 'cart:removecart' i.product.name %}" class="m-2"><i class="fa-solid fa-circle-minus fa-lg" style="color: #005cfa;"></i></a><br>
+                        <a href="{% url 'cart:deletecart' i.product.name %}" class="m-2"><i class="fa-solid fa-trash fa-lg" style="color: #f50000;"></i></a>
+                        {% endif %}
+                    </td></tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-4" style="position:relative">
+            <table class="table mb-5">
+                {% if total %}
+                <tr><th colspan="2" class="text-center text-danger fw-bold">Check Out</th> </tr>
+                <tr><td>TOTAL : <span class="fw-bold text-danger fs-4">{{total}}</span></td></tr>
+                {% endif %}
+            </table>
+            <a href="{% url 'cart:orderform' %}" class="btn btn-outline-success" style="position:absolute;left:10px;">Place Order</a>
+            <a href="{% url 'shop:allcategories' %}" class="btn btn-outline-primary" style="position:absolute;right:10px;">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% for i in o %}
+<center>
+<div class="container my-5">
+  <table class="table table-borderless" style="width:700px">
+    <tr>
+      <th style="border-bottom:1px solid green">Name of the Customer: </th>
+      <th class="text-success fs-4" style="border-bottom:1px solid green">{{i.user.first_name}}</th>
+    </tr>
+    <tr>
+      <td>Product Name:</td>
+      <td class="text-success">{{i.product.name}}</td>
+    </tr>
+    <tr>
+      <td>Product Price:</td>
+      <td class="text-primary">{{i.product.price}}</td>
+    </tr>
+    <tr>
+      <td>Delivery Address:</td>
+      <td>{{i.address}}</td>
+    </tr>
+    <tr>
+      <td>Phone:</td>
+      <td>{{i.phone}}</td>
+    </tr>
+    <tr>
+      <td>No of Items:</td>
+      <td>{{i.no_of_items}}</td>
+    </tr>
+    <tr>
+      <td>Ordered Date:</td>
+      <td>{{i.order_date}}</td>
+    </tr>
+    <tr>
+      <td>Delivery Status:</td>
+      <td class="text-danger">{{i.delivery_status}}</td>
+    </tr>
+  </table>
+</div>
+</center>
+{% endfor %}
+{% endblock %}

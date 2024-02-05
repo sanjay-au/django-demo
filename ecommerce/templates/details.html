@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+    {% if c %}
+    <div class="row m-5">
+        <div class="col-sm-4 p-2">
+            <img src="{{c.image.url}}" width="100%">
+        </div>
+        <div class="col-sm-8 px-5">
+            <h3 class="card-title fw-bold text-success">{{c.name}}</h3>
+            <p style="text-align:justify;">{{c.desc}}</p>
+            <h5 class="text-danger fw-bold">₹{{c.price}}</h5>
+            <p class="card-text">Available stock: {{c.stock}}</p>
+            {% if user.is_superuser == True %}
+                    {% if c.stock == 0 %}
+            <h2 class="text-danger">Out of Stock</h2>
+            <a href="{% url 'admin:index' %}" class="btn btn-outline-danger">Add Stocks</a>
+                    {% else %}
+            <h2 class="text-danger">In Stock</h2>
+            <a href="{% url 'admin:index' %}" class="btn btn-outline-danger">Add Stocks</a>
+                    {% endif %}
+            {% else %}
+                    {% if c.stock == 0 %}
+            <h2 class="text-danger">Out of Stock</h2>
+            <button disabled class="btn btn-outline-success">Add to Cart</button>
+                    {% else %}
+            <h2 class="text-success">Limited Stock</h2>
+            <a href="{% url 'cart:addtocart' c.name %}" class="btn btn-outline-success">Add to Cart</a>
+                    {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+body
+{
+background-color:#c7d9ed;
+color:#001429!important;
+font-family: 'Libre Baskerville', serif;
+}
+.navbar-light
+{
+border:2px solid #001429;
+}
+.bg-light{
+color:#360370!important;
+background-color:#c7d9ed!important;
+}
+.footer{
+width:100%;
+background-color:#001429!important;
+color:white!important;
+position:fixed;
+bottom:0px;
+left:0px;
+}
+.table{
+border:2px solid green;
+}
